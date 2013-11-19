@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MovieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="YearOfRelease" Type="datetime" />
+    <Property Name="Director" Type="int" />
+    <Property Name="Language" Type="nvarchar" MaxLength="100" />
+    <Property Name="Producer" Type="nvarchar" MaxLength="100" />
+    <Property Name="PlotSimple" Type="nvarchar" MaxLength="4000" />
+    <Property Name="PlotDetailed" Type="nvarchar(max)" />
+    <Property Name="AKA" Type="nvarchar" MaxLength="100" />
+    <Property Name="ImdbUrl" Type="nvarchar" MaxLength="200" />
+    <Property Name="PosterId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="PersonFirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PersonMiddleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PersonLastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Poster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="PostedImdb" Type="nvarchar" MaxLength="200" />
+    <Property Name="CoverPicture" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <Association Name="FK_Movie_Poster">
+    <End Role="Poster" Type="Self.Poster" Multiplicity="0..1" />
+    <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Poster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movie">
+        <PropertyRef Name="PosterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MovieModelStoreContainer">
+    <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Poster" EntityType="Self.Poster" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Movie_Poster" Association="Self.FK_Movie_Poster">
+      <End Role="Poster" EntitySet="Poster" />
+      <End Role="Movie" EntitySet="Movie" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

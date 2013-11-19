@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MovieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="YearOfRelease" Type="DateTime" Precision="3" />
+    <Property Name="Director" Type="Int32" />
+    <Property Name="Language" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Producer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PlotSimple" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="PlotDetailed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AKA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ImdbUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PosterId" Type="Int64" />
+    <NavigationProperty Name="Poster" Relationship="MovieModel.FK_Movie_Poster" FromRole="Movie" ToRole="Poster" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="PersonFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PersonMiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PersonLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="MovieEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Movies" EntityType="Self.Movie" />
+    <EntitySet Name="People" EntityType="Self.Person" />
+    <EntitySet Name="Posters" EntityType="MovieModel.Poster" />
+    <AssociationSet Name="FK_Movie_Poster" Association="MovieModel.FK_Movie_Poster">
+      <End Role="Poster" EntitySet="Posters" />
+      <End Role="Movie" EntitySet="Movies" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Poster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="PostedImdb" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CoverPicture" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movies" Relationship="MovieModel.FK_Movie_Poster" FromRole="Poster" ToRole="Movie" />
+  </EntityType>
+  <Association Name="FK_Movie_Poster">
+    <End Type="MovieModel.Poster" Role="Poster" Multiplicity="0..1" />
+    <End Type="MovieModel.Movie" Role="Movie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Poster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movie">
+        <PropertyRef Name="PosterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
