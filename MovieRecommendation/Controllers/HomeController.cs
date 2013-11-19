@@ -5,8 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace MovieRecommendation.Controllers
 {
@@ -65,16 +67,22 @@ namespace MovieRecommendation.Controllers
         [HttpGet]
         public ActionResult Search(string searchString)
         {
+            //GetData();
             using (var client = new HttpClient())
             {
                 var url = "http://mymovieapi.com/?title=Rachcha&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0";
                 client.BaseAddress = new Uri("http://mymovieapi.com/?title=Twister&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0");
                 HttpResponseMessage response = client.GetAsync(url).Result;
-                Stream receiveStream = response.Content.
-                StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
-                txtBlock.Text = readStream.ReadToEnd();
+                //Type t1 = typeof(string);
+                //var t = response.Content.ReadAsAsync(t1).Result;
+                
+                //var temp = response.Content.ReadAsAsync<JsonArray
+                object obj = JsonConvert.DeserializeObject<object>(response.Content.ReadAsStringAsync().Result);
+       
+                //StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+                //txtBlock.Text = readStream.ReadToEnd();
 
-
+                //Stream theStream = await gHttpClient.GetStreamAsync(theURI);
                 var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0.json?apikey=67rr3k74bktcnnpbfpnbwgnq";
 
                 //var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=twister&page_limit=10&page=1&apikey=67rr3k74bktcnnpbfpnbwgnq";
@@ -82,6 +90,20 @@ namespace MovieRecommendation.Controllers
                 //HttpResponseMessage anotherresponse = client.GetAsync(url).Result;
             }
             return View();
+        }
+
+        private async Task GetData()
+        {
+            using (var client = new HttpClient())
+            {
+                using (var response = await client.GetAsync("http://mymovieapi.com/?title=Rachcha&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0"))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var carJsonString = await response.Content.ReadAsStringAsync();
+                    }
+                }
+            }
         }
     }
 }
