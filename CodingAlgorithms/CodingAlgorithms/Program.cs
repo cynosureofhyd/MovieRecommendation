@@ -11,6 +11,7 @@ namespace CodingAlgorithms
         static void Main(string[] args)
         {
             List<int> randomArray = RandomArray.CreateRandomList(10);
+            //int lis = LongestIncreasingSubsequence.lis(randomArray);
             bool result = BalancingParentheses.IsBalanced("[(){}]");
             Console.WriteLine();
             bool result1 = BalancingParentheses.IsBalanced("[()[]{}({}])");

@@ -8,92 +8,77 @@ namespace CodingAlgorithms
 {
     public class LongestIncreasingSubsequence
     {
-        public class MaxValues
-        {
-            public int MaxEndingHere { get; set; }
 
-            public int Max { get; set; }
+       // public class InnerClass{
+       //     public int MaxNo { get; set; }
+       // }
+
+       //private static int _lis( List<int> arr, int n, InnerClass cl)
+       //{
+       //     /* Base case */
+       //     if(arr.Count() == 1)
+       //         return 1;
+ 
+       //     int res, max_ending_here = 1; // length of LIS ending with arr[n-1]
+ 
+       //     /* Recursively get all LIS ending with arr[0], arr[1] ... ar[n-2]. If
+       //        arr[i-1] is smaller than arr[n-1], and max ending with arr[n-1] needs
+       //        to be updated, then update it */
+       //     for(int i = 1; i < n; i++)
+       //     {
+       //         res = _lis(arr, i, cl);
+       //         if (arr[i-1] < arr[n-1] && res + 1 > max_ending_here)
+       //             max_ending_here = res + 1;
+       //     }
+ 
+       //     // Compare max_ending_here with the overall max. And update the
+       //     // overall max if needed
+       //     if (cl.MaxNo < max_ending_here)
+       //        cl.MaxNo = max_ending_here;
+ 
+       //     // Return length of LIS ending with arr[n-1]
+       //     return max_ending_here;
+       // }
+ 
+       // // The wrapper function for _lis()
+       // public static int lis(List<int> arr)
+       // {
+       //     // The max variable holds the result
+       //     int max = 1;
+       //     InnerClass cl = new InnerClass();
+       //     cl.MaxNo = 1;
+       //     // The function _lis() stores its result in max
+       //     _lis( arr, arr.Count(), cl );
+ 
+       //     // returns max
+       //     return max;
+       // }
+
+        public class InnerClass
+        {
+            public int max { get; set; }
+            public int minsofar { get; set; }
         }
 
 
-
-        public static int Find(List<int> array)
-        {
-            int result = 0;
-            return result;
-        }
-
-
-        public static int Wrapper(List<int> array)
-        {
-            int result = 0;
-            return result;  
-        }
-        //public static int Find(List<int> input)
+        //public static int Find(List<int> array, int first, int last)
         //{
-        //    List<int> result = new List<int>();
-        //    MaxValues maxValues = new MaxValues();
-        //    maxValues.Max = 1;
-
-        //    return maxValues.Max;
-        //}
-
-        //private static int Wrapper(List<int> array)
-        //{
-        //    if (array.Count() == 1)
+        //    if (array.Count <= 1)
         //        return 1;
-        //    else
+        //    int minsofar = 0;
+        //    for(int i = 0; i < array.Count(); i++)
         //    {
-
+        //        InnerClass result = Wrapper(array, first, last);
+        //        if (array[i] < result.minsofar)
+        //            return 1 + result.max;
+        //        else
+        //            return result.max;
         //    }
-        //    return 0;
         //}
 
-        /* To make use of recursive calls, this function must return two things:
-   1) Length of LIS ending with element arr[n-1]. We use max_ending_here
-      for this purpose
-   2) Overall maximum as the LIS may end with an element before arr[n-1]
-      max_ref is used this purpose.b
-The value of LIS of full array of size n is stored in *max_ref which is our final result
-*/
-//int _lis( int arr[], int n, int *max_ref)
-//{
-//    /* Base case */
-//    if(n == 1)
-//        return 1;
- 
-//    int res, max_ending_here = 1; // length of LIS ending with arr[n-1]
- 
-//    /* Recursively get all LIS ending with arr[0], arr[1] ... ar[n-2]. If
-//       arr[i-1] is smaller than arr[n-1], and max ending with arr[n-1] needs
-//       to be updated, then update it */
-//    for(int i = 1; i < n; i++)
-//    {
-//        res = _lis(arr, i, max_ref);
-//        if (arr[i-1] < arr[n-1] && res + 1 > max_ending_here)
-//            max_ending_here = res + 1;
-//    }
- 
-//    // Compare max_ending_here with the overall max. And update the
-//    // overall max if needed
-//    if (*max_ref < max_ending_here)
-//       *max_ref = max_ending_here;
- 
-//    // Return length bof LIS ending with arr[n-1]
-//    return max_ending_here;
-//}
- 
-//// The wrapper function for _lis()
-//int lis(int arr[], int n)
-//{
-//    // The max variable holds the result
-//    int max = 1;
- 
-//    // The function _lis() stores its result in max
-//    _lis( arr, n, &max );
- 
-//    // returns max
-//    return max;
-//}
+        //private static InnerClass Wrapper(List<int> array, int first, int last)
+        //{
+
+        //}
     }
 }
