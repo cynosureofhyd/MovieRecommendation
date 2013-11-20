@@ -67,29 +67,76 @@ namespace MovieRecommendation.Controllers
         [HttpGet]
         public ActionResult Search(string searchString)
         {
+            GetAllLinks();
             //GetData();
             using (var client = new HttpClient())
             {
-                var url = "http://mymovieapi.com/?title=Rachcha&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0";
-                client.BaseAddress = new Uri("http://mymovieapi.com/?title=Twister&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0");
-                HttpResponseMessage response = client.GetAsync(url).Result;
+                var topRentedMovieLists = "http://api.rottentomatoes.com/api/public/v1.0/lists.json?apikey=67rr3k74bktcnnpbfpnbwgnq";
+
+
+
+                //var language = "http://mymovieapi.com/?title=?&lang=en-US";
+                //var url = "http://mymovieapi.com/?title=Rachcha&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0";
+                //client.BaseAddress = new Uri("http://mymovieapi.com/?title=Twister&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0");
+                //client.BaseAddress = new Uri(language);
+                //HttpResponseMessage response = client.GetAsync(language).Result;
                 //Type t1 = typeof(string);
                 //var t = response.Content.ReadAsAsync(t1).Result;
                 
                 //var temp = response.Content.ReadAsAsync<JsonArray
-                object obj = JsonConvert.DeserializeObject<object>(response.Content.ReadAsStringAsync().Result);
+                //object obj = JsonConvert.DeserializeObject<object>(response.Content.ReadAsStringAsync().Result);
        
                 //StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
                 //txtBlock.Text = readStream.ReadToEnd();
 
                 //Stream theStream = await gHttpClient.GetStreamAsync(theURI);
-                var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0.json?apikey=67rr3k74bktcnnpbfpnbwgnq";
+                var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies.json?apikey=67rr3k74bktcnnpbfpnbwgnq";
 
                 //var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=twister&page_limit=10&page=1&apikey=67rr3k74bktcnnpbfpnbwgnq";
                 //client.BaseAddress = new Uri("http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=twister&page_limit=10&page=1&apikey=67rr3k74bktcnnpbfpnbwgnq");
-                //HttpResponseMessage anotherresponse = client.GetAsync(url).Result;
+                client.BaseAddress = new Uri(rottentomatoes);
+
+                HttpResponseMessage anotherresponse = client.GetAsync(rottentomatoes).Result;
+                object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
             }
             return View();
+        }
+
+
+
+        private static void GetAllLinks()
+        {
+            //GetData();
+            using (var client = new HttpClient())
+            {
+                var topRentedMovieLists = "http://api.rottentomatoes.com/api/public/v1.0/lists.json?apikey=67rr3k74bktcnnpbfpnbwgnq";
+
+
+
+                //var language = "http://mymovieapi.com/?title=?&lang=en-US";
+                //var url = "http://mymovieapi.com/?title=Rachcha&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0";
+                //client.BaseAddress = new Uri("http://mymovieapi.com/?title=Twister&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0");
+                //client.BaseAddress = new Uri(language);
+                //HttpResponseMessage response = client.GetAsync(language).Result;
+                //Type t1 = typeof(string);
+                //var t = response.Content.ReadAsAsync(t1).Result;
+
+                //var temp = response.Content.ReadAsAsync<JsonArray
+                //object obj = JsonConvert.DeserializeObject<object>(response.Content.ReadAsStringAsync().Result);
+
+                //StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+                //txtBlock.Text = readStream.ReadToEnd();
+
+                //Stream theStream = await gHttpClient.GetStreamAsync(theURI);
+                var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=67rr3k74bktcnnpbfpnbwgnq";
+
+                //var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=twister&page_limit=10&page=1&apikey=67rr3k74bktcnnpbfpnbwgnq";
+                //client.BaseAddress = new Uri("http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=twister&page_limit=10&page=1&apikey=67rr3k74bktcnnpbfpnbwgnq");
+                client.BaseAddress = new Uri(rottentomatoes);
+
+                HttpResponseMessage anotherresponse = client.GetAsync(rottentomatoes).Result;
+                object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
+            }
         }
 
         private async Task GetData()
