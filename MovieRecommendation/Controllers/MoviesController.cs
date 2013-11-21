@@ -85,6 +85,8 @@ namespace MovieRecommendation.Controllers
 
         public static RootObject DeserialiseRootObject(string json)
         {
+
+            //http://blogs.msdn.com/b/alexghi/archive/2008/12/22/using-anonymous-types-to-deserialize-json-data.aspx
             var obj = Activator.CreateInstance<RootObject>();
             using (var memoryStream = new MemoryStream(Encoding.Unicode.GetBytes(json)))
             {
