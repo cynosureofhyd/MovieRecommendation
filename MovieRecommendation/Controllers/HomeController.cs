@@ -37,11 +37,11 @@ namespace MovieRecommendation.Controllers
                 HttpResponseMessage response = client.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
                 var result = response.Content.ReadAsStringAsync();
-                MovieEntities db = new MovieEntities();
-                db.Movies.Add(new Movie()
-                    {
+                //MovieEntities db = new MovieEntities();
+                //db.Movies.Add(new Movie()
+                //    {
 
-                    });
+                //    });
             }
 
             return View();

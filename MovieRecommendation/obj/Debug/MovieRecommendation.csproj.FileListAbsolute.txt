@@ -59,3 +59,6 @@ c:\users\prashmaya\documents\visual studio 2013\Projects\MovieRecommendation\Mov
 c:\users\prashmaya\documents\visual studio 2013\Projects\MovieRecommendation\MovieRecommendation\obj\Debug\MovieRecommendation.dll
 c:\users\prashmaya\documents\visual studio 2013\Projects\MovieRecommendation\MovieRecommendation\obj\Debug\MovieRecommendation.pdb
 C:\Users\PrashMaya\Documents\Visual Studio 2013\Projects\MovieRecommendation\MovieRecommendation\obj\Debug\MovieRecommendation.csprojResolveAssemblyReference.cache
+C:\Users\PrashMaya\Documents\Visual Studio 2013\Projects\MovieRecommendation\MovieRecommendation\bin\AutoMapper.dll
+C:\Users\PrashMaya\Documents\Visual Studio 2013\Projects\MovieRecommendation\MovieRecommendation\bin\AutoMapper.Net4.dll
+C:\Users\PrashMaya\Documents\Visual Studio 2013\Projects\MovieRecommendation\MovieRecommendation\bin\AutoMapper.xml

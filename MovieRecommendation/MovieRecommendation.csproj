@@ -190,34 +190,15 @@
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IMDBModel.cs" />
+    <Compile Include="Models\Language.cs" />
     <Compile Include="Models\MovieModel.cs" />
+    <Compile Include="Models\PosterModel.cs" />
     <Compile Include="Models\postersmodel.cs" />
     <Compile Include="Models\ratingsmodel.cs" />
     <Compile Include="Models\releasedates.cs" />
-    <Compile Include="Movie.cs">
-      <DependentUpon>Movies.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Movies.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Movies.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Movies.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Movies.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Movies.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Movies.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Person.cs">
-      <DependentUpon>Movies.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Poster.cs">
-      <DependentUpon>Movies.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestFolder\Poster.cs" />
+    <Compile Include="Models\TestFolder\RootObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -230,23 +211,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Movies.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Movies.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Movies.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Movies.edmx</DependentUpon>
-      <LastGenOutput>Movies.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Movies.edmx.diagram">
-      <DependentUpon>Movies.edmx</DependentUpon>
-    </Content>
-    <Content Include="Movies.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Movies.edmx</DependentUpon>
-      <LastGenOutput>Movies.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -285,6 +249,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Movies\Get.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
