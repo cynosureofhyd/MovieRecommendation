@@ -72,9 +72,6 @@ namespace MovieRecommendation.Controllers
             using (var client = new HttpClient())
             {
                 var topRentedMovieLists = "http://api.rottentomatoes.com/api/public/v1.0/lists.json?apikey=67rr3k74bktcnnpbfpnbwgnq";
-
-
-
                 //var language = "http://mymovieapi.com/?title=?&lang=en-US";
                 //var url = "http://mymovieapi.com/?title=Rachcha&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0";
                 //client.BaseAddress = new Uri("http://mymovieapi.com/?title=Twister&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0");
