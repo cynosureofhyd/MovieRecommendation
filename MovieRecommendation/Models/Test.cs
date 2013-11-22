@@ -13,7 +13,7 @@ namespace MovieRecommendation.Models
         public string plot { get; set; }
 
         [DataMember(Name ="genres")]
-        public List<Genre> genres { get; set; }
+        public List<string> genres { get; set; }
 
         [DataMember(Name ="rated")]
         public string rated { get; set; }
@@ -37,7 +37,7 @@ namespace MovieRecommendation.Models
         public int year { get; set; }
 
         [DataMember(Name="filming_locations")]
-        public List<string> FilmingLocations { get; set; }
+        public string FilmingLocations { get; set; } //TODO: This is a string of values which need to be converted
 
         [DataMember(Name = "imdb_id")]
         public string ImdbId { get; set; }
@@ -61,7 +61,7 @@ namespace MovieRecommendation.Models
         public string Runtime { get; set; }
 
         [DataMember(Name = "imdb_url")]
-        public PosterModel ImdbUrl { get; set; }
+        public string ImdbUrl { get; set; }
 
         [DataMember(Name = "type")]
         public string type { get; set; }

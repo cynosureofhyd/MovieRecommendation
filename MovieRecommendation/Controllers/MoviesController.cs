@@ -17,85 +17,41 @@ namespace MovieRecommendation.Controllers
 {
     public class MoviesController : Controller
     {
-
-        private static string GetJsonDataFromMoviesApi(string searchTerm)
+        public ActionResult Get()
         {
-            var url = string.Format("http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q={0}&rsz=large&start=0", searchTerm);
-            var req = (HttpWebRequest)WebRequest.Create(url);
-            //req.Referer = "http://mywebsite.com";
-            var res = (HttpWebResponse)req.GetResponse();
-            string responseJson;
-            using (var streamReader = new StreamReader(res.GetResponseStream()))
-            {
-                responseJson = streamReader.ReadToEnd();
-            }
-            return responseJson;
+            string inputpath = "C:\\Users\\PrashMaya\\Desktop\\IMDBMovieTitleIds-0-2500.txt";
+            string inputfolder = "C:\\Users\\PrashMaya\\My Documents\\First2500MoviesIMDB\\Movie{0}.txt";
+
+            inputpath = String.Format(inputfolder, 1);
+            string text = System.IO.File.ReadAllText(@inputpath);
+            dynamic obj = ConvertToObj(text);
+            HashSet<string> keys = new HashSet<string>();
+            string[] lines = System.IO.File.ReadAllLines(@inputpath);
+            return View();
         }
 
-        public ActionResult Get()
+        public static dynamic ConvertToObj(string str)
+        {
+            dynamic moreInfo = JsonConvert.DeserializeObject(str);
+            string temp = moreInfo[0]["plot"];
+            return moreInfo;
+        }
+
+        public static void Process(string filetowritedownloadeddatato, string movieId)
         {
             //System.IO.File.WriteAllLines(@"C:\Users\PrashMaya\Desktop\WriteFirst50Lines.txt", titleIds.ToArray());
             using (var client = new HttpClient())
             {
+                movieId = "tt" + movieId;
                 string url = "http://mymovieapi.com/?ids={0}&type=json&plot=full&episode=1&lang=en-US&aka=simple&release=simple&business=0&tech=0";
-                string anotherurl = String.Format(url, "tt1343092");
+                string anotherurl = String.Format(url, movieId);
+                client.BaseAddress = new Uri(anotherurl);
+                HttpResponseMessage anotherresponse = client.GetAsync(anotherurl).Result;
 
-                string json = GetJsonFromWebService(anotherurl);
-                //client.BaseAddress = new Uri(anotherurl);
-                //HttpResponseMessage anotherresponse = client.GetAsync(anotherurl).Result;
-                //object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
+                object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
 
-                Test waitingFor = Deserialise(json);
-                RootObject haha = DeserialiseRootObject(json);
-                //Test waitingFor = Deserialise(obj.ToString());
-                //List<string> tempString = new List<string>();
-                //tempString.Add(obj.ToString());
-                //System.IO.File.WriteAllLines(movietitleId, tempString);
-            }
-            return View();
-        }
-
-
-        private static string GetJsonFromWebService(string url)
-        {
-            var req = (HttpWebRequest)WebRequest.Create(url);
-            //req.Referer = "http://mywebsite.com";
-            var res = (HttpWebResponse)req.GetResponse();
-            string responseJson;
-            using (var streamReader = new StreamReader(res.GetResponseStream()))
-            {
-                responseJson = streamReader.ReadToEnd();
-            }
-            return responseJson;
-        }
-
-        public static Test Deserialise(string json)
-        {
-            var obj = Activator.CreateInstance<Test>();
-            using (var memoryStream = new MemoryStream(Encoding.Unicode.GetBytes(json)))
-            {
-                var serializer = new DataContractJsonSerializer(obj.GetType());
-                obj = (Test)serializer.ReadObject(memoryStream);
-
-                JavaScriptSerializer jss = new JavaScriptSerializer();
-                Test finall = jss.Deserialize<Test>(json);
-                return obj;
-            }
-        }
-
-        public static RootObject DeserialiseRootObject(string json)
-        {
-
-            //http://blogs.msdn.com/b/alexghi/archive/2008/12/22/using-anonymous-types-to-deserialize-json-data.aspx
-            var obj = Activator.CreateInstance<RootObject>();
-            using (var memoryStream = new MemoryStream(Encoding.Unicode.GetBytes(json)))
-            {
-                var serializer = new DataContractJsonSerializer(obj.GetType());
-                obj = (RootObject)serializer.ReadObject(memoryStream);
-
-                JavaScriptSerializer jss = new JavaScriptSerializer();
-                RootObject finall = jss.Deserialize<RootObject>(json);
-                return obj;
+                dynamic moreInfo = JsonConvert.DeserializeObject(obj.ToString());
+                string temp = moreInfo[0]["plot"];
             }
         }
     }
