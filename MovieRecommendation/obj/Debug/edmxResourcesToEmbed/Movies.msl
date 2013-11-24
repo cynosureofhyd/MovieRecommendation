@@ -38,6 +38,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MovieCountries">
+      <EntityTypeMapping TypeName="MovieModel.MovieCountry">
+        <MappingFragment StoreEntitySet="MovieCountry">
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="MoviePersonRoles">
       <EntityTypeMapping TypeName="MovieModel.MoviePersonRole">
         <MappingFragment StoreEntitySet="MoviePersonRole">
@@ -50,12 +58,12 @@
     <EntitySetMapping Name="People">
       <EntityTypeMapping TypeName="MovieModel.Person">
         <MappingFragment StoreEntitySet="Person">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="PersonFirstName" ColumnName="PersonFirstName" />
-          <ScalarProperty Name="PersonMiddleName" ColumnName="PersonMiddleName" />
-          <ScalarProperty Name="PersonLastName" ColumnName="PersonLastName" />
-          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -63,8 +71,8 @@
       <EntityTypeMapping TypeName="MovieModel.PosterInfo">
         <MappingFragment StoreEntitySet="PosterInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Cover" ColumnName="Cover" />
           <ScalarProperty Name="Imdb" ColumnName="Imdb" />
+          <ScalarProperty Name="Cover" ColumnName="Cover" />
           <ScalarProperty Name="MovieId" ColumnName="MovieId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -77,14 +85,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="MovieCountry" TypeName="MovieModel.MovieCountry" StoreEntitySet="MovieCountry">
-      <EndProperty Name="Country">
-        <ScalarProperty Name="Id" ColumnName="CountryId" />
-      </EndProperty>
-      <EndProperty Name="Movie">
-        <ScalarProperty Name="ID" ColumnName="MovieId" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="MovieGenre" TypeName="MovieModel.MovieGenre" StoreEntitySet="MovieGenre">
       <EndProperty Name="Genre">
         <ScalarProperty Name="Id" ColumnName="GenreId" />
