@@ -19,12 +19,12 @@ namespace MovieRecommendation
             this.MoviePersonRoles = new HashSet<MoviePersonRole>();
         }
     
-        public long ID { get; set; }
-        public string PersonFirstName { get; set; }
-        public string PersonMiddleName { get; set; }
-        public string PersonLastName { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public long Id { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
         public string Gender { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
     
         public virtual ICollection<MoviePersonRole> MoviePersonRoles { get; set; }
     }

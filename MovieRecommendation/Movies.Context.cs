@@ -28,6 +28,7 @@ namespace MovieRecommendation
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
+        public virtual DbSet<MovieCountry> MovieCountries { get; set; }
         public virtual DbSet<MoviePersonRole> MoviePersonRoles { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<PosterInfo> PosterInfoes { get; set; }

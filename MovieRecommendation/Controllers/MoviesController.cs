@@ -24,12 +24,15 @@ namespace MovieRecommendation.Controllers
             string inputfolder = "C:\\Users\\PrashMaya\\My Documents\\First2500MoviesIMDB\\Movie{0}.txt";
             inputpath = String.Format(inputfolder, 1);
 
-            for(int i = 0; i < 2451; i++)
+            for(int i = 240; i < 2451; i++)
             {
                 inputpath = String.Format(inputfolder, i);
                 string text = System.IO.File.ReadAllText(@inputpath);
-                dynamic obj = ConvertToObj(text);
-                LoadDataIntoDb(obj);
+                if (text.Length > 10)
+                {
+                    dynamic obj = ConvertToObj(text);
+                    LoadDataIntoDb(obj, i);
+                }
             }
             
             HashSet<string> keys = new HashSet<string>();
@@ -37,7 +40,7 @@ namespace MovieRecommendation.Controllers
             return View();
         }
 
-        private static void LoadDataIntoDb(dynamic obj)
+        private static void LoadDataIntoDb(dynamic obj, int path)
         {
             try
             {
@@ -59,30 +62,80 @@ namespace MovieRecommendation.Controllers
                     var tempruntime = obj[0]["runtime"];
                     movie.Runtime = ConvertRuntime(tempruntime.ToString());
                     movie.Rated = obj[0]["rated"];
+                    movie.ImdbUrl = obj[0]["imdb_url"];
+                    movie.AKA = obj[0]["also_known_as"][0];
                     movie.IMDBRating = obj[0]["rating"];
                     Int64 releaseDate = obj[0]["release_date"];
                     DateTime dtTime = new DateTime(Int32.Parse(releaseDate.ToString().Substring(0, 4)), Int32.Parse(releaseDate.ToString().Substring(4, 2)), Int32.Parse(releaseDate.ToString().Substring(6, 2)));
                     movie.ReleaseDate = dtTime;
                     movie.Title = obj[0]["title"];
-                    Poster poster = new Poster();
-                    poster.imdb = obj[0]["poster"]["imdb"];
-                    poster.cover = obj[0]["poster"]["cover"];
+                    Genres(obj, db);
                     db.Movies.Add(movie);
                     db.SaveChanges();
                     var savedMovie = db.Movies.Where(m => m.ImdbID == movie.ImdbID).Distinct();
+
+                    MoviePersonRole(obj, db);
+                    var ListOfGenre = obj[0]["genres"];
+                    Poster poster = new Poster();
+                    poster.imdb = obj[0]["poster"]["imdb"];
+                    poster.cover = obj[0]["poster"]["cover"];
                     PosterInfo posterInfo = new PosterInfo();
                     posterInfo.Imdb = poster.imdb;
                     posterInfo.Cover = poster.cover;
                     posterInfo.MovieId = savedMovie.First().ID;
-                    posterInfo.Id = existingMovieId +1;
                     db.PosterInfoes.Add(posterInfo);
                     db.SaveChanges();
                 }
             }
             catch(Exception ex)
             {
+                string inputfolder = "C:\\Users\\PrashMaya\\My Documents\\Exceptions\\Movie{0}.txt";
+                string inputfile = String.Format(inputfolder, path);
+                System.IO.File.WriteAllText(inputfile,ex.ToString());
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public static void MoviePersonRole(dynamic obj, MovieEntities db)
+        {
+            string actorName = string.Empty;
+            var actor = db.Roles.Where(a => a.Description == "Actor");
+            for (int i = 0; i < obj[0]["actors"].Count; i++)
+             {
+                 Person per = new Person();
+                 actorName = obj[0]["actors"][i];
+                 //per.FirstName = 
+             }
+        }
+
+        public static void SplitName(string name)
+        {
+            Person p = new Person();
+            string[] ssize = name.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+            //string firstName = name.Substring(;
+            for(int i = 0; i < ssize.Count(); i++)
+            {
+                p.FirstName = ssize[i];
+                //p.MiddleName = ssize[]
+            }
+        }
+
+        public static void Genres(dynamic genres, MovieEntities db)
+        {
+            Genre genre = new Genre();
+            
+            string genrename = "";
+            for (int i = 0; i < genres[0]["genres"].Count; i++)
+            {
+                genrename = genres[0]["genres"][i];
+                if (!String.IsNullOrWhiteSpace(genrename))
+                {
+                    var g = db.Genres.Where(gen => gen.Name == genrename).Distinct();
+                }
+            }
+
+            //db.Genres.Add(genre);
+            //db.SaveChanges();
         }
 
         public static int ConvertRuntime(string runtime)

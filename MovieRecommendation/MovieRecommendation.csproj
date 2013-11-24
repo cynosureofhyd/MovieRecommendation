@@ -208,6 +208,9 @@
     <Compile Include="Movie.cs">
       <DependentUpon>Movies.tt</DependentUpon>
     </Compile>
+    <Compile Include="MovieCountry.cs">
+      <DependentUpon>Movies.tt</DependentUpon>
+    </Compile>
     <Compile Include="MoviePersonRole.cs">
       <DependentUpon>Movies.tt</DependentUpon>
     </Compile>

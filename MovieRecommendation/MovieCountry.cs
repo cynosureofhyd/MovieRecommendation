@@ -12,11 +12,9 @@ namespace MovieRecommendation
     using System;
     using System.Collections.Generic;
     
-    public partial class PosterInfo
+    public partial class MovieCountry
     {
-        public long Id { get; set; }
-        public string Imdb { get; set; }
-        public string Cover { get; set; }
         public long MovieId { get; set; }
+        public int CountryId { get; set; }
     }
 }
