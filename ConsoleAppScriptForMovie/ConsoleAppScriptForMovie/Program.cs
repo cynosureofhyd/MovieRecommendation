@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -12,9 +14,38 @@ namespace ConsoleAppScriptForMovie
     {
         static void Main(string[] args)
         {
+            ConvertToBase64Image();
+            //string wow = ImageToByteArray();
+            //Image im = ImageToString.Base64ToImage(wow);
             DeleteDups();
             //LoadDataIntoDb();
         }
+
+        static string ImageToByteArray(string url)
+        {
+            var webClient = new WebClient();
+            byte[] imageBytes = webClient.DownloadData(url);
+            // Convert byte[] to Base64 String
+            string base64String = Convert.ToBase64String(imageBytes);
+            return base64String;
+            //ImageToString.
+        }
+
+
+        static void ConvertToBase64Image()
+        {
+            MovieEntities db = new MovieEntities();
+            foreach(PosterInfo poster in db.PosterInfoes)
+            {
+                if(poster.Imdb != null && !string.IsNullOrWhiteSpace(poster.Imdb))
+                {
+                    string base64 = ImageToByteArray(poster.Imdb);
+                    poster.LocalPath = base64;
+                    db.SaveChanges();       
+                }
+            }
+        }
+
 
         static void DeleteDups()
         {
