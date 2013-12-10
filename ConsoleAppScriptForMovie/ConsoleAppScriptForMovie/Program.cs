@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -31,6 +32,12 @@ namespace ConsoleAppScriptForMovie
             //ImageToString.
         }
 
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
 
         static void ConvertToBase64Image()
         {
@@ -45,7 +52,6 @@ namespace ConsoleAppScriptForMovie
                 }
             }
         }
-
 
         static void DeleteDups()
         {
@@ -80,9 +86,6 @@ namespace ConsoleAppScriptForMovie
                             Console.WriteLine(e.Message);
                         }
                     }
-                        //db.PosterInfoes.Remove(q.ElementAt(0));
-                    //db.SaveChanges();
-                    //Console.WriteLine("Hello");
                 }
             }
 
