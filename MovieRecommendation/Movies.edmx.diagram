@@ -17,6 +17,7 @@
         <AssociationConnector Association="MovieModel.fk_MoviePersonRole_Person" ManuallyRouted="false" />
         <AssociationConnector Association="MovieModel.fk_MoviePersonRole_Role" ManuallyRouted="false" />
         <AssociationConnector Association="MovieModel.MovieGenre" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieModel.fk_PosterInfo_Movie" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

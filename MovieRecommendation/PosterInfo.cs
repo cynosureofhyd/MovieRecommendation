@@ -18,5 +18,8 @@ namespace MovieRecommendation
         public string Imdb { get; set; }
         public string Cover { get; set; }
         public long MovieId { get; set; }
+        public string LocalPath { get; set; }
+    
+        public virtual Movie Movie { get; set; }
     }
 }

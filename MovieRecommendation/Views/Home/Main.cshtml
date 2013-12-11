@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MovieRecommendation.Movie>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Director)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Language)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlotSimple)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlotDetailed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AKA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImdbUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Runtime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IMDBRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImdbID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Director)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Language)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlotSimple)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlotDetailed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AKA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImdbUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Runtime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IMDBRating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImdbID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

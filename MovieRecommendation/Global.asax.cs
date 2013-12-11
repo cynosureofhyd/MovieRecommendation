@@ -17,6 +17,7 @@ namespace MovieRecommendation
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteTable.Routes.MapHttpRoute("MyApi", "api/{controller}");
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }

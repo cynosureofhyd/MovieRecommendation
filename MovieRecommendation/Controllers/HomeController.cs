@@ -26,6 +26,13 @@ namespace MovieRecommendation.Controllers
             return View();
         }
 
+        public ActionResult Main()
+        {
+            MovieEntities db = new MovieEntities();
+            var top100Movies = db.Movies.Take(100).ToList();
+            return PartialView("Main", top100Movies);
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

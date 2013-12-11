@@ -70,6 +70,7 @@
     <EntitySetMapping Name="PosterInfoes">
       <EntityTypeMapping TypeName="MovieModel.PosterInfo">
         <MappingFragment StoreEntitySet="PosterInfo">
+          <ScalarProperty Name="LocalPath" ColumnName="LocalPath" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Imdb" ColumnName="Imdb" />
           <ScalarProperty Name="Cover" ColumnName="Cover" />

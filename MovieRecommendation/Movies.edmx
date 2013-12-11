@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MovieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MovieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Id" />
@@ -84,6 +84,7 @@
           <Property Name="Imdb" Type="nvarchar" MaxLength="4000" />
           <Property Name="Cover" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="MovieId" Type="bigint" Nullable="false" />
+          <Property Name="LocalPath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -152,6 +153,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_PosterInfo_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="PosterInfo" Type="Self.PosterInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosterInfo">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MovieModelStoreContainer">
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
@@ -182,9 +195,12 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="MoviePersonRole" EntitySet="MoviePersonRole" />
           </AssociationSet>
+          <AssociationSet Name="fk_PosterInfo_Movie" Association="Self.fk_PosterInfo_Movie">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="PosterInfo" EntitySet="PosterInfo" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MovieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -224,6 +240,7 @@
           <Property Name="MovieType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MoviePersonRoles" Relationship="Self.fk_MoviePersonRole_Movie" FromRole="Movie" ToRole="MoviePersonRole" />
           <NavigationProperty Name="Genres" Relationship="Self.MovieGenre" FromRole="Movie" ToRole="Genre" />
+          <NavigationProperty Name="PosterInfoes" Relationship="MovieModel.fk_PosterInfo_Movie" FromRole="Movie" ToRole="PosterInfo" />
         </EntityType>
         <EntityType Name="MovieCountry">
           <Key>
@@ -266,6 +283,8 @@
           <Property Name="Imdb" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Cover" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MovieId" Type="Int64" Nullable="false" />
+          <Property Name="LocalPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movie" Relationship="MovieModel.fk_PosterInfo_Movie" FromRole="PosterInfo" ToRole="Movie" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -340,7 +359,23 @@
             <End Role="Genre" EntitySet="Genres" />
             <End Role="Movie" EntitySet="Movies" />
           </AssociationSet>
+          <AssociationSet Name="fk_PosterInfo_Movie" Association="MovieModel.fk_PosterInfo_Movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="PosterInfo" EntitySet="PosterInfoes" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="fk_PosterInfo_Movie">
+          <End Type="MovieModel.Movie" Role="Movie" Multiplicity="1" />
+          <End Type="MovieModel.PosterInfo" Role="PosterInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosterInfo">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -416,6 +451,7 @@
           <EntitySetMapping Name="PosterInfoes">
             <EntityTypeMapping TypeName="MovieModel.PosterInfo">
               <MappingFragment StoreEntitySet="PosterInfo">
+                <ScalarProperty Name="LocalPath" ColumnName="LocalPath" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Imdb" ColumnName="Imdb" />
                 <ScalarProperty Name="Cover" ColumnName="Cover" />
