@@ -15,10 +15,11 @@ namespace ConsoleAppScriptForMovie
     {
         static void Main(string[] args)
         {
-            ConvertToBase64Image();
+            DownloadImagesToLocal.Download();
+            //ConvertToBase64Image();
             //string wow = ImageToByteArray();
             //Image im = ImageToString.Base64ToImage(wow);
-            DeleteDups();
+            //DeleteDups();
             //LoadDataIntoDb();
         }
 
