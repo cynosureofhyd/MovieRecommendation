@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using MovieRecommendation.Utilities;
 
 namespace MovieRecommendation.ControllersApi
 {
@@ -30,7 +35,40 @@ namespace MovieRecommendation.ControllersApi
                              p.Cover, 
                              p.LocalPath
                          }).Take(10);
-            return result;
+            Image t = Test(result.First().Imdb);
+            // Save the image as a JPEG.
+            t.Save("c:\\button.jpeg", ImageFormat.Jpeg);
+            dynamic finalresult = new ExpandoObject();
+            finalresult = result.First();
+            byte[] temp = GetBytes(result.First().LocalPath);
+            finalresult.LocalPath = ByteArrayToImage.byteArrayToImage(temp);
+            return finalresult;
+        }
+
+
+        //private static void storeimages(MovieEntities db)
+        //{
+        //    var data = db.PosterInfoes.All
+        //}
+
+        private static Image Test(string url)
+        {
+            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+
+            using (HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse())
+            {
+                using (Stream stream = httpWebReponse.GetResponseStream())
+                {
+                    return Image.FromStream(stream);
+                }
+            }
+        }
+
+        private static byte[] GetBytes(string str)
+        {
+            byte[] bytes = new byte[str.Length * sizeof(char)];
+            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
         }
 
         //// GET api/<controller>/5

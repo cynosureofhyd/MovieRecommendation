@@ -101,7 +101,7 @@ namespace MovieRecommendation.Controllers
                 client.BaseAddress = new Uri(rottentomatoes);
 
                 HttpResponseMessage anotherresponse = client.GetAsync(rottentomatoes).Result;
-                object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
+                //object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
             }
             return View();
         }
