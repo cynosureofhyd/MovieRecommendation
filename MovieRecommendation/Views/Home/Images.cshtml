@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieRecommendation.Models.MovieAndPosterInfo>
+﻿@model List<MovieRecommendation.Models.MovieAndPosterInfo>
 
 <script type="text/javascript">
     $.ready(function () {
@@ -19,27 +19,27 @@
 <link rel="stylesheet/less" type="text/css" href="~/Content/GridImages.less">
 <div id="pattern" class="pattern">
     <ul class="g">
-        <li><a href="@Model.First().Poster.Imdb"></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
-        <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://ia.media-imdb.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_SX214_.jpg" alt="Product Name" /></a></li>
+    @*<li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>*@
     </ul>
 </div>
 <!--End Pattern HTML-->

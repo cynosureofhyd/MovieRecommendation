@@ -27,7 +27,7 @@ namespace MovieRecommendation.Controllers
             return View();
         }
 
-        public ActionResult Main()
+        public ActionResult Images()
         {
             MovieEntities db = new MovieEntities();
             var top100Movies = db.Movies.Take(100).ToList();
