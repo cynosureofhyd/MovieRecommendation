@@ -3,5 +3,30 @@
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var apiUrl = "http://localhost:55051/api/User/Post";
+        var imagesInput = {
+            start: 5,
+            end: 10
+        };
 
+        alert("Hello");
+        //$('#pattern').keyup(function () {
+
+        $.ajax({
+            type: "POST",
+            url: '/api/Main/GetAllImages',
+            data: JSON.stringify(imagesInput),
+            success: success,
+            datatype: "json",
+            contenttype: "application/json; charset=utf-8"
+        });
+
+        var success = function () {
+            alert("Yeah");
+        };
+    });
+</script>
 <p>Use this area to provide additional information.</p>

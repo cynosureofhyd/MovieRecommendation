@@ -1,7 +1,21 @@
 ﻿@model IEnumerable<MovieRecommendation.Models.MovieAndPosterInfo>
 
-<!--Pattern HTML-->
-@*<a href="~/Content/GridImages.less">~/Content/GridImages.less</a>*@
+<script type="text/javascript">
+    $.ready(function () {
+        //$('#pattern').keyup(function () {
+            $.ajax({
+                type: "POST",
+                url: 'api/Main',
+                data: { start: 1, end: 100 },
+                success: success,
+                dataType: dataType
+            });
+
+        //});
+    });
+    
+        </script>
+        @*"~/Content/GridImages.less">~/Content/GridImages.less</a>*@
 <link rel="stylesheet/less" type="text/css" href="~/Content/GridImages.less">
 <div id="pattern" class="pattern">
     <ul class="g">

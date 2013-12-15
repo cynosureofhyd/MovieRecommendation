@@ -48,7 +48,7 @@ namespace MovieRecommendation.ControllersApi
 
         [HttpPost]
         [ActionName("getAllImages")]
-        public object GetAllImages(int start, int end)
+        public object GetAllImages([FromBody]ImagesInput imagesInput)
         {
             MovieEntities db = new MovieEntities();
             var top100Movies = db.Movies.Take(100).ToList();
@@ -68,7 +68,7 @@ namespace MovieRecommendation.ControllersApi
                     Poster = requiredMovie.PosterInfo
                 });
             }
-            return results;
+            return Json<List<MovieAndPosterInfo>>(results);
         }
 
         private static Image Test(string url)
