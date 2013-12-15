@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using MovieRecommendation.Models;
 using MovieRecommendation.Utilities;
 
 namespace MovieRecommendation.ControllersApi
@@ -45,11 +46,30 @@ namespace MovieRecommendation.ControllersApi
             return finalresult;
         }
 
-
-        //private static void storeimages(MovieEntities db)
-        //{
-        //    var data = db.PosterInfoes.All
-        //}
+        [HttpPost]
+        [ActionName("getAllImages")]
+        public object GetAllImages(int start, int end)
+        {
+            MovieEntities db = new MovieEntities();
+            var top100Movies = db.Movies.Take(100).ToList();
+            var requiredtop100Movies = from d in db.Movies.Take(100)
+                                       join poster in db.PosterInfoes on d.ID equals poster.MovieId
+                                       select new
+                                       {
+                                           Movie = d,
+                                           PosterInfo = poster
+                                       };
+            List<MovieAndPosterInfo> results = new List<MovieAndPosterInfo>();
+            foreach (var requiredMovie in requiredtop100Movies)
+            {
+                results.Add(new MovieAndPosterInfo()
+                {
+                    Movie = requiredMovie.Movie,
+                    Poster = requiredMovie.PosterInfo
+                });
+            }
+            return results;
+        }
 
         private static Image Test(string url)
         {

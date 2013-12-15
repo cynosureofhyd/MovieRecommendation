@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MovieRecommendation.Models;
 using Newtonsoft.Json;
 
 namespace MovieRecommendation.Controllers
@@ -30,7 +31,25 @@ namespace MovieRecommendation.Controllers
         {
             MovieEntities db = new MovieEntities();
             var top100Movies = db.Movies.Take(100).ToList();
-            return PartialView("Main", top100Movies);
+            var requiredtop100Movies = from d in db.Movies.Take(100)
+                                       join poster in db.PosterInfoes on d.ID equals poster.MovieId
+                                       select new
+                                       {
+                                           Movie = d,
+                                           PosterInfo = poster
+                                       };
+            List<MovieAndPosterInfo> results = new List<MovieAndPosterInfo>();
+            foreach(var requiredMovie in requiredtop100Movies)
+            {
+                results.Add(new MovieAndPosterInfo()
+                    {
+                        Movie = requiredMovie.Movie,
+                        Poster = requiredMovie.PosterInfo
+                    });
+            }
+
+            return PartialView("Images", results);
+            //return PartialView("Main", requiredtop100Movies.Select(s => s.Movie));
         }
 
         public ActionResult Contact()
