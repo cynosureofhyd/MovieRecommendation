@@ -7,9 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using MovieRecommendation.Models;
 using MovieRecommendation.Utilities;
+using Newtonsoft.Json;
 
 namespace MovieRecommendation.ControllersApi
 {
@@ -50,6 +52,8 @@ namespace MovieRecommendation.ControllersApi
         [ActionName("getAllImages")]
         public object GetAllImages([FromBody]ImagesInput imagesInput)
         {
+
+            var test = Get();
             MovieEntities db = new MovieEntities();
             var top100Movies = db.Movies.Take(100).ToList();
             var requiredtop100Movies = from d in db.Movies.Take(100)
@@ -69,6 +73,42 @@ namespace MovieRecommendation.ControllersApi
                 });
             }
             return Json<List<MovieAndPosterInfo>>(results);
+        }
+
+        public HttpResponseMessage Get()
+        {
+
+            MovieEntities db = new MovieEntities();
+            var top100Movies = db.Movies.Take(100).ToList();
+            var requiredtop100Movies = from d in db.Movies.Take(100)
+                                       join poster in db.PosterInfoes on d.ID equals poster.MovieId
+                                       select new
+                                       {
+                                           Movie = d,
+                                           PosterInfo = poster
+                                       };
+            List<MovieAndPosterInfo> results = new List<MovieAndPosterInfo>();
+            foreach (var requiredMovie in requiredtop100Movies)
+            {
+                results.Add(new MovieAndPosterInfo()
+                {
+                    Movie = requiredMovie.Movie,
+                    Poster = requiredMovie.PosterInfo
+                });
+            }
+
+
+
+            string yourJson = JsonConvert.SerializeObject(results, Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
+
+            //string yourJson = GetJsonFromSomewhere();
+            var response = this.Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent(yourJson, Encoding.UTF8, "application/json");
+            return response;
         }
 
         private static Image Test(string url)

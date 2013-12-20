@@ -12,9 +12,7 @@ namespace MovieRecommendation.Controllers
         // GET: /Main/
         public ActionResult Index()
         {
-            MovieEntities db = new MovieEntities();
-
-            
+            //MovieEntities db = new MovieEntities();
 
             return View();
         }

@@ -12,10 +12,24 @@ namespace MovieRecommendation
             // Web API configuration and services
 
             // Web API routes
+            //var json = config.Formatters.JsonFormatter;
+            //json.SerializerSettings.PreserveReferencesHandling =
+            //    Newtonsoft.Json.PreserveReferencesHandling.Objects;
+
+            //GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+
             config.MapHttpAttributeRoutes();
 
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize; 
-            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects; 
+            //config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
+     = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling
+                 = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+
+            //config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize; 
+            //config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects; 
 
             //config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; 
 
