@@ -81,6 +81,9 @@
     <Property Name="MovieId" Type="Int64" Nullable="false" />
     <Property Name="LocalPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Movie" Relationship="MovieModel.fk_PosterInfo_Movie" FromRole="PosterInfo" ToRole="Movie" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LocalFolderPath" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="ImdbID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Role">
     <Key>

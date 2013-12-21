@@ -80,6 +80,9 @@
     <Property Name="Cover" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="MovieId" Type="bigint" Nullable="false" />
     <Property Name="LocalPath" Type="nvarchar(max)" />
+    <Property Name="Image" Type="image" />
+    <Property Name="LocalFolderPath" Type="nvarchar" MaxLength="2000" />
+    <Property Name="ImdbID" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="Role">
     <Key>

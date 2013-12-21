@@ -1,17 +1,28 @@
 ﻿@model List<MovieRecommendation.Models.MovieAndPosterInfo>
 
 <script type="text/javascript">
-    $.ready(function () {
-        //$('#pattern').keyup(function () {
-            $.ajax({
-                type: "POST",
-                url: 'api/Main',
-                data: { start: 1, end: 100 },
-                success: success,
-                dataType: dataType
-            });
+    $(document).ready(function () {
+        var apiUrl = "http://localhost:55051/api/User/Post";
+        var imagesInput = {
+            start: 5,
+            end: 10
+        };
 
-        //});
+        //alert("Hello");
+        //$('#pattern').keyup(function () {
+
+        $.ajax({
+            type: "POST",
+            url: '/api/Main/GetAllImagesJson',
+            data: JSON.stringify(imagesInput),
+            success: success,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        });
+
+        var success = function () {
+            alert("Yeah");
+        };
     });
     
         </script>

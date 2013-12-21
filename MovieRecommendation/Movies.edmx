@@ -85,6 +85,9 @@
           <Property Name="Cover" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="MovieId" Type="bigint" Nullable="false" />
           <Property Name="LocalPath" Type="nvarchar(max)" />
+          <Property Name="Image" Type="image" />
+          <Property Name="LocalFolderPath" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ImdbID" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -285,6 +288,9 @@
           <Property Name="MovieId" Type="Int64" Nullable="false" />
           <Property Name="LocalPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Movie" Relationship="MovieModel.fk_PosterInfo_Movie" FromRole="PosterInfo" ToRole="Movie" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LocalFolderPath" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="ImdbID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -451,6 +457,9 @@
           <EntitySetMapping Name="PosterInfoes">
             <EntityTypeMapping TypeName="MovieModel.PosterInfo">
               <MappingFragment StoreEntitySet="PosterInfo">
+                <ScalarProperty Name="ImdbID" ColumnName="ImdbID" />
+                <ScalarProperty Name="LocalFolderPath" ColumnName="LocalFolderPath" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="LocalPath" ColumnName="LocalPath" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Imdb" ColumnName="Imdb" />

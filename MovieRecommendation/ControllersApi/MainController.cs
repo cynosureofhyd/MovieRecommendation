@@ -53,10 +53,11 @@ namespace MovieRecommendation.ControllersApi
         public object GetAllImages([FromBody]ImagesInput imagesInput)
         {
 
-            var test = Get();
+            //var test = Get();
+            //return test;
             MovieEntities db = new MovieEntities();
             var top100Movies = db.Movies.Take(100).ToList();
-            var requiredtop100Movies = from d in db.Movies.Take(100)
+            var requiredtop100Movies = from d in db.Movies.Take(10)
                                        join poster in db.PosterInfoes on d.ID equals poster.MovieId
                                        select new
                                        {
@@ -75,12 +76,14 @@ namespace MovieRecommendation.ControllersApi
             return Json<List<MovieAndPosterInfo>>(results);
         }
 
-        public HttpResponseMessage Get()
-        {
 
+        [HttpPost]
+        [ActionName("getAllImagesJson")]
+        public HttpResponseMessage GetAllImagesJson([FromBody]ImagesInput imagesInput)
+        {
             MovieEntities db = new MovieEntities();
             var top100Movies = db.Movies.Take(100).ToList();
-            var requiredtop100Movies = from d in db.Movies.Take(100)
+            var requiredtop100Movies = from d in db.Movies.Take(10)
                                        join poster in db.PosterInfoes on d.ID equals poster.MovieId
                                        select new
                                        {
@@ -96,9 +99,6 @@ namespace MovieRecommendation.ControllersApi
                     Poster = requiredMovie.PosterInfo
                 });
             }
-
-
-
             string yourJson = JsonConvert.SerializeObject(results, Formatting.None,
                         new JsonSerializerSettings()
                         {

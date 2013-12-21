@@ -17,15 +17,17 @@
 
         $.ajax({
             type: "POST",
-            url: '/api/Main/GetAllImages',
+            url: '/api/Main/GetAllImagesJson',
             data: JSON.stringify(imagesInput),
             success: success,
             dataType: "json",
             contentType: "application/json; charset=utf-8"
+        }).done(function (data) {
+            alert(data[0].Movie.Title);
         });
 
         var success = function () {
-            //alert("Yeah");
+            alert("Yeah");
         };
     });
 </script>
