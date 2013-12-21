@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MovieRecommendation.Models;
 using Newtonsoft.Json;
 
 namespace MovieRecommendation.Controllers
@@ -26,6 +27,31 @@ namespace MovieRecommendation.Controllers
             return View();
         }
 
+        public ActionResult Images()
+        {
+            MovieEntities db = new MovieEntities();
+            var top100Movies = db.Movies.Take(100).ToList();
+            var requiredtop100Movies = from d in db.Movies.Take(100)
+                                       join poster in db.PosterInfoes on d.ID equals poster.MovieId
+                                       select new
+                                       {
+                                           Movie = d,
+                                           PosterInfo = poster
+                                       };
+            List<MovieAndPosterInfo> results = new List<MovieAndPosterInfo>();
+            foreach(var requiredMovie in requiredtop100Movies)
+            {
+                results.Add(new MovieAndPosterInfo()
+                    {
+                        Movie = requiredMovie.Movie,
+                        Poster = requiredMovie.PosterInfo
+                    });
+            }
+
+            return PartialView("Images", results);
+            //return PartialView("Main", requiredtop100Movies.Select(s => s.Movie));
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -37,30 +63,12 @@ namespace MovieRecommendation.Controllers
                 HttpResponseMessage response = client.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
                 var result = response.Content.ReadAsStringAsync();
-                //MovieEntities db = new MovieEntities();
-                //db.Movies.Add(new Movie()
-                //    {
-
-                //    });
             }
-
             return View();
         }
 
         public ActionResult Search()
         {
-            //using (var client = new HttpClient())
-            //{
-            //    var url = "http://mymovieapi.com/?title=Twister&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0";
-            //    client.BaseAddress = new Uri("http://mymovieapi.com/?title=Twister&type=json&plot=simple&episode=1&limit=1&yg=0&mt=none&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0");
-            //    HttpResponseMessage response = client.GetAsync(url).Result;
-
-            //    var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0.json?apikey=67rr3k74bktcnnpbfpnbwgnq";
-
-            //    //var rottentomatoes = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=twister&page_limit=10&page=1&apikey=67rr3k74bktcnnpbfpnbwgnq";
-            //    //client.BaseAddress = new Uri("http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=twister&page_limit=10&page=1&apikey=67rr3k74bktcnnpbfpnbwgnq");
-            //    //HttpResponseMessage anotherresponse = client.GetAsync(url).Result;
-            //}
             return View();
         }
 
@@ -94,7 +102,7 @@ namespace MovieRecommendation.Controllers
                 client.BaseAddress = new Uri(rottentomatoes);
 
                 HttpResponseMessage anotherresponse = client.GetAsync(rottentomatoes).Result;
-                object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
+                //object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
             }
             return View();
         }
@@ -132,7 +140,7 @@ namespace MovieRecommendation.Controllers
                 client.BaseAddress = new Uri(rottentomatoes);
 
                 HttpResponseMessage anotherresponse = client.GetAsync(rottentomatoes).Result;
-                object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
+                //object obj = JsonConvert.DeserializeObject<object>(anotherresponse.Content.ReadAsStringAsync().Result);
             }
         }
 

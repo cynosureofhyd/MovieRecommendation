@@ -36,6 +36,7 @@
     <Property Name="MovieType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="MoviePersonRoles" Relationship="Self.fk_MoviePersonRole_Movie" FromRole="Movie" ToRole="MoviePersonRole" />
     <NavigationProperty Name="Genres" Relationship="Self.MovieGenre" FromRole="Movie" ToRole="Genre" />
+    <NavigationProperty Name="PosterInfoes" Relationship="MovieModel.fk_PosterInfo_Movie" FromRole="Movie" ToRole="PosterInfo" />
   </EntityType>
   <EntityType Name="MovieCountry">
     <Key>
@@ -78,6 +79,11 @@
     <Property Name="Imdb" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
     <Property Name="Cover" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MovieId" Type="Int64" Nullable="false" />
+    <Property Name="LocalPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movie" Relationship="MovieModel.fk_PosterInfo_Movie" FromRole="PosterInfo" ToRole="Movie" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="LocalFolderPath" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="ImdbID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -152,5 +158,21 @@
       <End Role="Genre" EntitySet="Genres" />
       <End Role="Movie" EntitySet="Movies" />
     </AssociationSet>
+    <AssociationSet Name="fk_PosterInfo_Movie" Association="MovieModel.fk_PosterInfo_Movie">
+      <End Role="Movie" EntitySet="Movies" />
+      <End Role="PosterInfo" EntitySet="PosterInfoes" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="fk_PosterInfo_Movie">
+    <End Type="MovieModel.Movie" Role="Movie" Multiplicity="1" />
+    <End Type="MovieModel.PosterInfo" Role="PosterInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PosterInfo">
+        <PropertyRef Name="MovieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

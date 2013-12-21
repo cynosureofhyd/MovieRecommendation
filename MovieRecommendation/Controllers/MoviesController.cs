@@ -19,12 +19,17 @@ namespace MovieRecommendation.Controllers
     {
         public ActionResult Get()
         {
+            return View();
+        }
+
+        public ActionResult LoadData()
+        {
             //AddSampleRoleData();
             string inputpath = "C:\\Users\\PrashMaya\\Desktop\\IMDBMovieTitleIds-0-2500.txt";
             string inputfolder = "C:\\Users\\PrashMaya\\My Documents\\First2500MoviesIMDB\\Movie{0}.txt";
             inputpath = String.Format(inputfolder, 1);
 
-            for(int i = 240; i < 2451; i++)
+            for (int i = 240; i < 2451; i++)
             {
                 inputpath = String.Format(inputfolder, i);
                 string text = System.IO.File.ReadAllText(@inputpath);
@@ -34,7 +39,7 @@ namespace MovieRecommendation.Controllers
                     LoadDataIntoDb(obj, i);
                 }
             }
-            
+
             HashSet<string> keys = new HashSet<string>();
             string[] lines = System.IO.File.ReadAllLines(@inputpath);
             return View();

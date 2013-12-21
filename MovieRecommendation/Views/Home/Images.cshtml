@@ -1,0 +1,74 @@
+﻿@model List<MovieRecommendation.Models.MovieAndPosterInfo>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var apiUrl = "http://localhost:55051/api/User/Post";
+        var imagesInput = {
+            start: 5,
+            end: 10
+        };
+
+        //alert("Hello");
+        //$('#pattern').keyup(function () {
+
+        $.ajax({
+            type: "POST",
+            url: '/api/Main/GetAllImagesJson',
+            data: JSON.stringify(imagesInput),
+            success: success,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        });
+
+        var success = function () {
+            alert("Yeah");
+        };
+    });
+    
+        </script>
+        @*"~/Content/GridImages.less">~/Content/GridImages.less</a>*@
+<link rel="stylesheet/less" type="text/css" href="~/Content/GridImages.less">
+<div id="pattern" class="pattern">
+    <ul class="g">
+    <li><a href="#"><img src="http://ia.media-imdb.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_SX214_.jpg" alt="Product Name" /></a></li>
+    @*<li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>
+    <li><a href="#"><img src="http://bradfrost.github.com/this-is-responsive/patterns/images/fpo_square.png" alt="Product Name" /></a></li>*@
+    </ul>
+</div>
+<!--End Pattern HTML-->
+
+<div class="container">
+    <section class="pattern-description">
+        <h1>Image Grid</h1>
+        <p>A list of images that by default is two-columns. As screen real estate becomes available, more columns are added.</p>
+        <h2>Considerations</h2>
+        <ul>
+            <li>Assume small screen by default. Add columns as necessary.</li>
+        </ul>
+    </section>
+    <footer role="contentinfo">
+        <div>
+            <nav id="menu">
+                <a href="http://bradfrost.github.com/this-is-responsive/patterns.html">&larr;More Responsive Patterns</a>
+            </nav>
+        </div>
+    </footer>
+</div>

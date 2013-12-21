@@ -18,6 +18,7 @@ namespace MovieRecommendation
         {
             this.MoviePersonRoles = new HashSet<MoviePersonRole>();
             this.Genres = new HashSet<Genre>();
+            this.PosterInfoes = new HashSet<PosterInfo>();
         }
     
         public long ID { get; set; }
@@ -38,5 +39,6 @@ namespace MovieRecommendation
     
         public virtual ICollection<MoviePersonRole> MoviePersonRoles { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<PosterInfo> PosterInfoes { get; set; }
     }
 }

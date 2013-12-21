@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Movie Recommendation</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
-    <meta name="description" content="Goodreads for Movies" />
+    <meta name="description" content="GoodReads for Movies" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -26,7 +25,8 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Search", "Search", "Home")</li>
-                    <li>@Html.ActionLink("Movies", "Get", "Movies")</li>
+                    <li>@Html.ActionLink("MainPage", "Main", "Home")</li>
+                    @*<li>@Html.ActionLink("Movies", "Get", "Movies")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -36,10 +36,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Goodreads for Movies</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
